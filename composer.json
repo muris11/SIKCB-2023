@@ -1,0 +1,17 @@
+{
+  "name": "kelaskita/cms",
+  "description": "Portal kelas dengan album per semester",
+  "type": "project",
+  "require": {
+    "php": ">=8.0",
+    "phpmailer/phpmailer": "^6.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\": "app/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true
+  }
+}

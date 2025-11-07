@@ -1,0 +1,57 @@
+DirectoryIndex index.php
+Options -Indexes
+RewriteEngine On
+
+# Bantu routing di shared hosting
+Options -MultiViews
+
+# Security headers (jika tersedia)
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-XSS-Protection "1; mode=block"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Lindungi file sensitif
+<FilesMatch "\.(env|sql|log|ini|bak|backup)$">
+  Require all denied
+</FilesMatch>
+<Files "config*.php">
+  Require all denied
+</Files>
+
+# Compression & caching
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/jpg "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/gif "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+</IfModule>
+
+# Sitemap: paksa sitemap.xml mengarah ke sitemap.php (dinamis)
+RewriteRule ^sitemap\.xml$ sitemap.php [L,NC]
+
+# Kecualikan file khusus (biarkan robots dan favicon berjalan langsung)
+RewriteRule ^(sitemap\.php|robots\.txt|favicon\.ico)$ - [L,NC]
+
+# Favicon SVG/PNG fallback ke folder public (jika tidak ada di root)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^favicon\.(svg|png)$ public/favicon.$1 [L,NC]
+
+# File/dir statis langsung
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Sisanya → index.php
+# Jika project berada di subfolder, aktifkan RewriteBase:
+# RewriteBase /subfolder/
+RewriteRule ^ index.php [L]

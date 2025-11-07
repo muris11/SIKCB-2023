@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Mini Library Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .btn-mustard {
+        background-color: #d4a017;
+        border-color: #d4a017;
+        color: white;
+      }
+      .btn-outline-mustard {
+        color: #d4a017;
+        border-color: #d4a017;
+      }
+      .btn-outline-mustard:hover {
+        background-color: #d4a017;
+        border-color: #d4a017;
+        color: white;
+      }
+      .debug-console {
+        background: #1a1a1a;
+        color: #00ff00;
+        font-family: "Courier New", monospace;
+        padding: 15px;
+        height: 200px;
+        overflow-y: auto;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-4">
+      <div class="alert alert-info">
+        <h4><i class="fas fa-info-circle me-2"></i>Test Form Mini Library</h4>
+        <p>
+          Form ini test JavaScript yang sama seperti di admin. Buka Developer
+          Tools (F12) untuk melihat console log.
+        </p>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <button
+            class="btn btn-mustard btn-lg mb-3"
+            data-bs-toggle="modal"
+            data-bs-target="#addModal"
+          >
+            <i class="fas fa-plus me-2"></i>Test Form
+          </button>
+        </div>
+        <div class="col-md-4">
+          <h5>Debug Console:</h5>
+          <div class="debug-console" id="debugOutput">Loading...\n</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal - EXACT COPY dari admin -->
+    <div class="modal fade" id="addModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header border-bottom">
+            <h5 class="modal-title fw-bold" id="modalTitle">
+              Test Mini Library Form
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form
+            method="POST"
+            action="/kelaskita-cms/admin/mini_library/save"
+            enctype="multipart/form-data"
+            id="libraryForm"
+          >
+            <div class="modal-body">
+              <div class="alert alert-warning">
+                <strong>🔧 Test Mode:</strong> Form akan submit ke backend yang
+                asli
+              </div>
+
+              <input type="hidden" name="_csrf" value="test-csrf-token" />
+              <input type="hidden" id="libraryId" name="id" value="" />
+              <input type="hidden" id="existingImage" name="image" value="" />
+
+              <!-- Nama Library -->
+              <div class="mb-3">
+                <label for="groupName" class="form-label fw-semibold"
+                  >Nama Library <span class="text-danger">*</span></label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="groupName"
+                  name="group_name"
+                  required
+                  placeholder="Contoh: Digital Innovation Library"
+                />
+              </div>
+
+              <!-- Deskripsi -->
+              <div class="mb-3">
+                <label for="description" class="form-label fw-semibold"
+                  >Deskripsi <span class="text-danger">*</span></label
+                >
+                <textarea
+                  class="form-control"
+                  id="description"
+                  name="description"
+                  rows="3"
+                  required
+                  placeholder="Jelaskan tentang library ini..."
+                ></textarea>
+              </div>
+
+              <!-- Kategori -->
+              <div class="mb-3">
+                <label for="category" class="form-label fw-semibold"
+                  >Kategori <span class="text-danger">*</span></label
+                >
+                <select
+                  class="form-select"
+                  id="category"
+                  name="category"
+                  required
+                >
+                  <option value="">-- Pilih Kategori --</option>
+                  <option value="Technology">Technology</option>
+                  <option value="Smart City">Smart City</option>
+                  <option value="Research">Research</option>
+                  <option value="Programming">Programming</option>
+                  <option value="Language">Language</option>
+                  <option value="Management">Management</option>
+                  <option value="Design">Design</option>
+                  <option value="Business">Business</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+
+              <!-- Link -->
+              <div class="mb-3">
+                <label for="link" class="form-label fw-semibold"
+                  >Link Library <span class="text-danger">*</span></label
+                >
+                <input
+                  type="url"
+                  class="form-control"
+                  id="link"
+                  name="link"
+                  required
+                  placeholder="https://..."
+                />
+              </div>
+
+              <!-- Gambar -->
+              <div class="mb-3">
+                <label for="libraryImage" class="form-label fw-semibold"
+                  >Gambar Library</label
+                >
+                <input
+                  type="file"
+                  class="form-control"
+                  id="libraryImage"
+                  name="library_image"
+                  accept="image/*"
+                />
+                <small class="text-muted d-block mt-1"
+                  >Max: 2MB. Format: JPG, PNG</small
+                >
+                <div id="imagePreview" class="mt-2"></div>
+              </div>
+
+              <!-- Anggota -->
+              <div class="mb-3">
+                <label class="form-label fw-semibold"
+                  >Anggota Tim <span class="text-danger">*</span></label
+                >
+                <div id="membersList">
+                  <div class="member-item mb-2">
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="members[]"
+                        placeholder="Nama anggota"
+                        required
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-outline-danger remove-member"
+                        style="display: none"
+                      >
+                        <i class="fas fa-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-sm btn-outline-primary"
+                  id="addMemberBtn"
+                >
+                  <i class="fas fa-plus me-1"></i>Tambah Anggota
+                </button>
+                <div class="mt-2">
+                  <small class="text-muted">
+                    Debug: <span id="memberCount">1</span> anggota saat ini
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer border-top">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Batal
+              </button>
+              <button type="submit" class="btn btn-mustard" id="submitBtn">
+                <i class="fas fa-save me-1"></i>Simpan Test
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Debug output function
+      const debugOutput = document.getElementById("debugOutput");
+      function debugLog(msg) {
+        const timestamp = new Date().toLocaleTimeString();
+        debugOutput.textContent += `[${timestamp}] ${msg}\n`;
+        debugOutput.scrollTop = debugOutput.scrollHeight;
+        console.log(`[DEBUG] ${msg}`);
+      }
+
+      debugLog("🚀 Test page loaded");
+
+      // EXACT SAME JavaScript dari admin file
+      document.addEventListener("DOMContentLoaded", function () {
+        debugLog("✅ DOM loaded, initializing Mini Library...");
+
+        // Debug counter
+        let debugCounter = 0;
+        function debugLogCount(msg) {
+          debugLog(`[${++debugCounter}] ${msg}`);
+        }
+
+        // Define global functions that need to be accessible from onclick handlers
+        window.editLibrary = function (data) {
+          debugLogCount(
+            "editLibrary() called with data: " + JSON.stringify(data)
+          );
+          document.getElementById("modalTitle").textContent =
+            "Edit Mini Library";
+          document.getElementById("libraryId").value = data.id;
+          document.getElementById("groupName").value = data.group_name;
+          document.getElementById("description").value = data.description;
+          document.getElementById("category").value = data.category;
+          document.getElementById("link").value = data.link;
+          document.getElementById("existingImage").value = data.image;
+
+          // Clear members list
+          const membersList = document.getElementById("membersList");
+          membersList.innerHTML = "";
+
+          // Add members
+          if (data.members && data.members.length > 0) {
+            data.members.forEach((member, index) => {
+              debugLogCount(`Adding member ${index}: ${member}`);
+              const div = document.createElement("div");
+              div.className = "member-item mb-2";
+              div.innerHTML = `
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="members[]" value="${escapeHtml(
+                          member
+                        )}" required>
+                        <button type="button" class="btn btn-outline-danger remove-member">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+              membersList.appendChild(div);
+            });
+          } else {
+            // Add one empty field
+            debugLogCount("No members found, adding empty field");
+            const div = document.createElement("div");
+            div.className = "member-item mb-2";
+            div.innerHTML = `
+                <div class="input-group">
+                    <input type="text" class="form-control" name="members[]" placeholder="Nama anggota" required>
+                    <button type="button" class="btn btn-outline-danger remove-member" style="display: none;">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            membersList.appendChild(div);
+          }
+
+          // Update button visibility
+          updateRemoveButtons();
+
+          // Show modal
+          const modal = new bootstrap.Modal(
+            document.getElementById("addModal")
+          );
+          modal.show();
+        };
+
+        // Update visibility of remove buttons
+        window.updateRemoveButtons = function () {
+          const items = document.querySelectorAll(".member-item");
+          debugLogCount(
+            `updateRemoveButtons() called, found ${items.length} items`
+          );
+          items.forEach((item) => {
+            const btn = item.querySelector(".remove-member");
+            btn.style.display = items.length > 1 ? "block" : "none";
+          });
+
+          // Update counter
+          const counter = document.getElementById("memberCount");
+          if (counter) counter.textContent = items.length;
+        };
+
+        // Escape HTML untuk keamanan
+        window.escapeHtml = function (text) {
+          const map = {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;",
+          };
+          return text.replace(/[&<>"']/g, (m) => map[m]);
+        };
+
+        // Tambah anggota baru
+        const addMemberBtn = document.getElementById("addMemberBtn");
+        if (addMemberBtn) {
+          addMemberBtn.addEventListener("click", function () {
+            debugLogCount("Add member button clicked");
+            const membersList = document.getElementById("membersList");
+            const div = document.createElement("div");
+            div.className = "member-item mb-2";
+            div.innerHTML = `
+                <div class="input-group">
+                    <input type="text" class="form-control" name="members[]" placeholder="Nama anggota">
+                    <button type="button" class="btn btn-outline-danger remove-member">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            membersList.appendChild(div);
+            updateRemoveButtons();
+          });
+          debugLogCount("✅ Add member button listener attached");
+        } else {
+          debugLogCount("❌ Add member button NOT found");
+        }
+
+        // Remove member button clicks
+        document.addEventListener("click", function (e) {
+          if (e.target.closest(".remove-member")) {
+            debugLogCount("Remove member button clicked");
+            e.target.closest(".member-item").remove();
+            updateRemoveButtons();
+          }
+        });
+
+        // Reset form saat modal dibuka dari tombol tambah
+        const addBtns = document.querySelectorAll(
+          '[data-bs-target="#addModal"]'
+        );
+        addBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            debugLogCount("Modal trigger clicked - resetting form");
+            document.getElementById("modalTitle").textContent =
+              "Test Mini Library Form";
+            document.getElementById("libraryForm").reset();
+            document.getElementById("libraryId").value = "";
+            document.getElementById("existingImage").value = "";
+
+            const membersList = document.getElementById("membersList");
+            membersList.innerHTML = `
+                <div class="member-item mb-2">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="members[]" placeholder="Nama anggota" required>
+                        <button type="button" class="btn btn-outline-danger remove-member" style="display: none;">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            updateRemoveButtons();
+          });
+        });
+        debugLogCount(
+          `✅ Modal trigger listeners attached to ${addBtns.length} buttons`
+        );
+
+        // Form submission handler
+        const form = document.getElementById("libraryForm");
+        if (form) {
+          form.addEventListener("submit", function (e) {
+            e.preventDefault(); // Prevent actual submission for testing
+
+            debugLogCount("=== FORM SUBMISSION ===");
+            debugLogCount("Action: " + form.action);
+            debugLogCount("Method: " + form.method);
+
+            // Collect form data for debugging
+            const formData = new FormData(form);
+            debugLogCount("Form data:");
+            for (let [key, value] of formData.entries()) {
+              debugLogCount(`  ${key}: ${value}`);
+            }
+
+            // Check required fields
+            const groupName = form.group_name.value.trim();
+            const description = form.description.value.trim();
+            const category = form.category.value.trim();
+            const link = form.link.value.trim();
+            const memberInputs = form.querySelectorAll(
+              'input[name="members[]"]'
+            );
+            const members = Array.from(memberInputs)
+              .map((input) => input.value.trim())
+              .filter((val) => val !== "");
+
+            debugLogCount(
+              `Validation: name=${groupName}, desc=${description}, cat=${category}, link=${link}, members=${members.length}`
+            );
+
+            if (
+              !groupName ||
+              !description ||
+              !category ||
+              !link ||
+              members.length === 0
+            ) {
+              debugLogCount("❌ Validation failed - missing required fields");
+              alert("Harap isi semua field yang wajib!");
+              return false;
+            }
+
+            debugLogCount("✅ Validation passed - form ready for submission!");
+            debugLogCount(
+              "🎉 TEST SUCCESSFUL - JavaScript bekerja dengan baik!"
+            );
+
+            // Show success message
+            alert(
+              "✅ TEST BERHASIL!\n\nJavaScript bekerja dengan baik.\nSemua validasi passed.\nForm siap untuk submit ke server."
+            );
+          });
+          debugLogCount("✅ Form submission listener attached");
+        } else {
+          debugLogCount("❌ Form NOT found");
+        }
+
+        debugLogCount("🎉 Mini Library initialization complete");
+      });
+    </script>
+  </body>
+</html>

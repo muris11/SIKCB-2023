@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /app/
+Disallow: /vendor/
+
+# Gunakan URL absolut agar bisa diakses Google
+Sitemap: https://sikcb.my.id/sitemap.xml
