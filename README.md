@@ -1,4 +1,4 @@
-# KelasKita CMS
+# SIKC B 2023
 
 [![PHP Version](https://img.shields.io/badge/PHP-8.0+-blue.svg)](https://php.net)
 [![MySQL](https://img.shields.io/badge/MySQL-5.7+-orange.svg)](https://mysql.com)
@@ -6,9 +6,9 @@
 
 ## 📋 Deskripsi Proyek
 
-KelasKita CMS adalah sistem manajemen konten (Content Management System) berbasis web yang dirancang khusus untuk mengelola kegiatan pembelajaran di lingkungan pendidikan. Sistem ini menyediakan platform terintegrasi untuk mengelola semester, kelas, materi pembelajaran, galeri foto, perpustakaan mini, dan administrasi pengguna.
+**SIKC B 2023** adalah sistem manajemen konten (Content Management System) berbasis web yang dirancang khusus untuk mengelola kegiatan pembelajaran di lingkungan pendidikan. Sistem ini menyediakan platform terintegrasi untuk mengelola semester, kelas, materi pembelajaran, galeri foto, perpustakaan mini, dan administrasi pengguna.
 
-Proyek ini dikembangkan menggunakan arsitektur MVC (Model-View-Controller) dengan fokus pada kemudahan penggunaan, keamanan, dan skalabilitas untuk mendukung proses pembelajaran yang efektif.
+Proyek ini dikembangkan sebagai bagian dari Sistem Informasi Kelas (SIKC) Batch 2023 menggunakan arsitektur MVC (Model-View-Controller) dengan fokus pada kemudahan penggunaan, keamanan, dan skalabilitas untuk mendukung proses pembelajaran yang efektif.
 
 ## ✨ Fitur Utama
 
@@ -326,7 +326,7 @@ SHOW CREATE TABLE classes;
 
 ## 🤝 Kontribusi
 
-Kami menerima kontribusi untuk pengembangan KelasKita CMS!
+Kami menerima kontribusi untuk pengembangan **SIKC B 2023 - Sistem Informasi Kelas Batch 2023**!
 
 ### Proses Kontribusi
 
@@ -350,7 +350,7 @@ Proyek ini menggunakan lisensi **MIT License**.
 ```
 MIT License
 
-Copyright (c) 2023 KelasKita CMS
+Copyright (c) 2023 SIKC B 2023 - Sistem Informasi Kelas Batch 2023
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -365,11 +365,17 @@ copies or substantial portions of the Software.
 
 ## 📞 Dukungan & Kontak
 
-- **Developer**: Muris AK
-- **Email**: [your-email@example.com]
-- **GitHub**: [https://github.com/muris11](https://github.com/muris11)
+- **Project**: SIKC B 2023 - Sistem Informasi Kelas Batch 2023
+- **Developer**: Muris AK (NIM: [Your NIM])
+- **Institution**: [Your University/Institution Name]
+- **Course**: [Course Name/Subject]
+- **Email**: muris.ak@student.example.ac.id
+- **GitHub Profile**: [https://github.com/muris11](https://github.com/muris11)
 - **Repository**: [https://github.com/muris11/SIKCB-2023](https://github.com/muris11/SIKCB-2023)
-- **Issues**: [GitHub Issues](https://github.com/muris11/SIKCB-2023/issues)
+- **Issues & Support**: [GitHub Issues](https://github.com/muris11/SIKCB-2023/issues)
+- **Documentation**: [Repository Wiki](https://github.com/muris11/SIKCB-2023/wiki)
+- **LinkedIn**: [Your LinkedIn Profile]
+- **Portfolio**: [Your Portfolio Website]
 
 ## 🙏 Acknowledgments
 
@@ -402,4 +408,6 @@ copies or substantial portions of the Software.
 
 ---
 
-**KelasKita CMS** - Membuat pembelajaran lebih terorganisir dan efektif! 🎓
+**SIKC B 2023** - Sistem Informasi Kelas Batch 2023 - Membuat pembelajaran lebih terorganisir dan efektif! 🎓
+
+*Developed with ❤️ by Muris AK - Academic Project 2023*
