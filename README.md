@@ -4,6 +4,10 @@
 [![MySQL](https://img.shields.io/badge/MySQL-5.7+-orange.svg)](https://mysql.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+## 🌐 Live Demo
+
+🚀 **[Lihat Demo Langsung](https://sikcb.my.id/)** - Sistem Informasi Kelas Batch 2023
+
 ## 📋 Deskripsi Proyek
 
 **SIKC B 2023** adalah sistem manajemen konten (Content Management System) berbasis web yang dirancang khusus untuk mengelola kegiatan pembelajaran di lingkungan pendidikan. Sistem ini menyediakan platform terintegrasi untuk mengelola semester, kelas, materi pembelajaran, galeri foto, perpustakaan mini, dan administrasi pengguna.
@@ -410,4 +414,4 @@ copies or substantial portions of the Software.
 
 **SIKC B 2023** - Sistem Informasi Kelas Batch 2023 - Membuat pembelajaran lebih terorganisir dan efektif! 🎓
 
-*Developed with ❤️ by Muris AK - Academic Project 2023*
+_Developed with ❤️ by Muris AK - Academic Project 2023_
